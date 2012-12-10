@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>$i18n.getText("saphr.servlet.person.title")</title>
+        <meta name="decorator" content="atl.general"/>
+        $webResourceManager.requireResource("jira.webresources:global-static")
+        $webResourceManager.requireResource("jira.webresources:jira-global")
+        $webResourceManager.requireResource("com.atlassian.auiplugin:ajs")
+    </head>
+    <body class="aui">
+        <div style="margin: 12px;">
+            <a href="$baseUrl/plugins/servlet/saphr/orgs">Orgs</a>
+            <a href="$baseUrl/plugins/servlet/saphr/changeemail">Change email</a>
+        </div>
+        <table width="100%" border="1" cellspacing="0" cellpadding="0" style="background: white;">
+        <caption><h3>$i18n.getText("saphr.servlet.person.title")</h3></caption>
+        <thead style="background: gray; text-align: center;">
+            <tr>
+                <th>$i18n.getText("saphr.servlet.person.id")</th>
+                <th>$i18n.getText("saphr.servlet.person.fioru")</th>
+                <th>$i18n.getText("saphr.servlet.person.fioen")</th>
+                <th>$i18n.getText("saphr.servlet.person.fiolocal")</th>
+                <th>$i18n.getText("saphr.servlet.person.email")</th>
+                <th>$i18n.getText("saphr.servlet.person.birthday")</th>
+                <th>$i18n.getText("saphr.servlet.person.hireday")</th>
+                <th>$i18n.getText("saphr.servlet.person.fireday")</th>
+                <th>$i18n.getText("saphr.servlet.person.orgunit")</th>
+                <th>$i18n.getText("saphr.servlet.person.position")</th>
+                <th>$i18n.getText("saphr.servlet.person.country")</th>
+                <th>$i18n.getText("saphr.servlet.person.city")</th>
+                <th>$i18n.getText("saphr.servlet.person.balanceutin")</th>
+                <th>$i18n.getText("saphr.servlet.person.personaldata")</th>
+                <th>$i18n.getText("saphr.servlet.person.personalsubdata")</th>
+                <th>$i18n.getText("saphr.servlet.person.group")</th>
+                <th>$i18n.getText("saphr.servlet.person.managerid")</th>
+                <th>$i18n.getText("saphr.servlet.person.absence")</th>
+                <th>$i18n.getText("saphr.servlet.person.probationaryperiod")</th>
+                <th>$i18n.getText("saphr.servlet.person.maritalstatus")</th>
+                <th>$i18n.getText("saphr.servlet.person.children")</th>
+            </tr>
+        <thead>
+        <tbody style="text-align: center;">
+        #foreach($person in $persons)
+            <tr>
+                <td>$!person.getPersonId()</td>
+                <td>$!person.getFioRussian()</td>
+                <td>$!person.getFioEnglish()</td>
+                <td>$!person.getFioLocal()</td>
+                <td>$!person.getEmail()</td>
+                <td>$!person.getBirthDay()</td>
+                <td>$!person.getHireDay()</td>
+                <td>$!person.getFirehDay()</td>
+                <td>$!person.getOrgUnit()</td>
+                <td>$!person.getPosition()</td>
+                <td>$!person.getCountry()</td>
+                <td>$!person.getCity()</td>
+                <td>$!person.getBalanceUnit()</td>
+                <td>$!person.getPersonalData()</td>
+                <td>$!person.getSubPersonalData()</td>
+                <td>$!person.getGroup()</td>
+                <td>$!person.getManagerId()</td>
+                <td style="word-wrap: break-word;">$!person.getAbsense()</td>
+                <td>$!person.getProbationaryPeriod()</td>
+                <td>$!person.getMaritalStatus()</td>
+                <td style="word-wrap: break-word;">$!person.getChildren()</td>
+            </tr>
+        #end
+        </tbody>
+        </table>
+    </body>
+</html>

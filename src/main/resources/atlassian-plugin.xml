@@ -1,0 +1,46 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+    </plugin-info>
+
+    <resource type="i18n" name="i18n" location="i18n.saphr"/>
+
+    <web-item key="saphr-config-link" name="SAP HR configuration link" section="system.admin/globalsettings" weight="95">
+        <label key="saphr.admin.configure.title"/>
+        <condition class="com.atlassian.jira.plugin.webfragment.conditions.JiraGlobalPermissionCondition">
+            <param name="permission">admin</param>
+        </condition>
+        <link linkId="saphr-config-link">/secure/AdminSettingsAction!default.jspa</link>
+    </web-item>
+
+    <webwork1 key="saphr-action" name="SAP HR configuration action" class="java.lang.Object">
+        <actions>
+            <action name="ru.mail.jira.plugins.AdminSettingsAction" alias="AdminSettingsAction">
+                <view name="input">/templates/saphrconfig.vm</view>
+                <view name="success">/templates/saphrconfig.vm</view>
+            </action>
+        </actions>
+    </webwork1>
+
+    <component key="saphr-config" name="SAP HR plugin configuration" class="ru.mail.jira.plugins.PluginDataImpl"/>
+    <component-import key="pluginSettings" interface="com.atlassian.sal.api.pluginsettings.PluginSettingsFactory"/>
+    <component-import key="renderer" interface="com.atlassian.templaterenderer.velocity.one.six.VelocityTemplateRenderer"/>
+    <component-import key="loginUriProvider" interface="com.atlassian.sal.api.auth.LoginUriProvider"/>
+    <component-import key="eventPublisher" interface="com.atlassian.event.api.EventPublisher"/>
+    <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties"/>
+
+    <servlet key="org-renderer" class="ru.mail.jira.plugins.saphr.SoapTestOrg">
+        <url-pattern>/saphr/orgs</url-pattern>
+    </servlet>
+    <servlet key="person-renderer" class="ru.mail.jira.plugins.saphr.SoapTestPerson">
+        <url-pattern>/saphr/persons</url-pattern>
+    </servlet>
+    <servlet key="changemail-renderer" class="ru.mail.jira.plugins.saphr.SoapTestChangeEmail">
+        <url-pattern>/saphr/changemail</url-pattern>
+    </servlet>
+        <servlet key="connect-renderer" class="ru.mail.jira.plugins.saphr.ConnectTestSap">
+        <url-pattern>/saphr/wsdl</url-pattern>
+    </servlet>
+</atlassian-plugin>

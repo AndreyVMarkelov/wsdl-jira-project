@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>$i18n.getText("saphr.servlet.org.title")</title>
+        <meta name="decorator" content="atl.general"/>
+        $webResourceManager.requireResource("jira.webresources:global-static")
+        $webResourceManager.requireResource("jira.webresources:jira-global")
+        $webResourceManager.requireResource("com.atlassian.auiplugin:ajs")
+    </head>
+    <body class="aui">
+        <div style="margin: 12px;">
+            <a href="$baseUrl/plugins/servlet/saphr/changeemail">Change email</a>
+            <a href="$baseUrl/plugins/servlet/saphr/persons">Persons</a>
+        </div>
+        <table width="100%" border="1" cellspacing="0" cellpadding="0" style="background: white;">
+        <caption><h3>$i18n.getText("saphr.servlet.org.title")</h3></caption>
+        <thead style="background: gray; text-align: center;">
+            <tr>
+                <th width="10%">$i18n.getText("saphr.servlet.org.type")</th>
+                <th width="10%">$i18n.getText("saphr.servlet.org.objid")</th>
+                <th width="10%">$i18n.getText("saphr.servlet.org.parentid")</th>
+                <th width="20%">$i18n.getText("saphr.servlet.org.name")</th>
+                <th width="10%">$i18n.getText("saphr.servlet.org.manager")</th>
+                <th width="40%">$i18n.getText("saphr.servlet.org.workstation")</th>
+            </tr>
+        </thead>
+        <tbody style="text-align: center;">
+        #foreach($org in $orgs)
+            <tr>
+                <td width="10%">
+                #if($org.getOtype())
+                #if($org.getOtype().equal("O"))$i18n.getText("saphr.servlet.org.type.job")#else$i18n.getText("saphr.servlet.org.type.object")#end
+                #end
+                </td>
+                <td width="10%">$!org.getObjId()</td>
+                <td width="10%">$!org.getParentObjId()</td>
+                <td width="20%">$!org.getsText()</td>
+                <td width="10%">$!org.getManagerId()</td>
+                <td width="40%">$!org.getWorkplace()</td>
+            </tr>
+        #end
+        </tbody>
+        </table>
+    </body>
+</html>

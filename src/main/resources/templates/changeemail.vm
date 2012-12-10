@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title>$i18n.getText("saphr.servlet.change.title")</title>
+        <meta name="decorator" content="atl.general"/>
+        $webResourceManager.requireResource("jira.webresources:global-static")
+        $webResourceManager.requireResource("jira.webresources:jira-global")
+        $webResourceManager.requireResource("com.atlassian.auiplugin:ajs")
+    </head>
+    <body class="aui">
+        <div style="margin: 12px;">
+            <a href="$baseUrl/plugins/servlet/saphr/orgs">Orgs</a>
+            <a href="$baseUrl/plugins/servlet/saphr/persons">Persons</a>
+        </div>
+        <table>
+            <tr>
+                <td>Person ID:</td>
+                <td><input type="text" id="person" name="person"/></td>
+            </tr>
+            <tr>
+                <td>New email:</td>
+                <td><input type="text" id="email" name="email"/></td>
+            </tr>
+            <tr>
+                <td><button onclick="apply();" id="button">Apply</button></td>
+                <td></td>
+            </tr>
+        </table>
+        <input type="hidden" id="jiralogin" name="jiralogin" value="$restUser"/>
+        <input type="hidden" id="jirapassword" name="jirapassword" value="$restPass"/>
+        <script language="javascript">
+            function apply() {
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '$baseUrl/plugins/servlet/saphr/changemail',
+                    dataType: "JSON",
+                    data: {person: jQuery("#person").val(), email: jQuery("#email").val(), jiralogin: jQuery("#jiralogin").val(), jirapassword: jQuery("#jirapassword").val()},
+                    success: function(msg) {
+                        var obj = eval("(" + msg + ")");
+                        if (obj.error) {
+                            alert(obj.error.message);
+                        } else {
+                            alert("Success");
+                        }
+                    },
+                    error: function (request, status, error) {
+                        alert(request.responseText);
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>
